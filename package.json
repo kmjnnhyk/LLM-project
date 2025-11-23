@@ -4,10 +4,12 @@
   "scripts": {
     "dev": "turbo dev --filter=\"./apps/client\" --filter=\"./packages/services/backend\"",
     "dev:client": "turbo dev --filter=\"./apps/client\"",
+    "dev:server": "turbo dev --filter=\"./packages/services/backend\"",
     "lint": "turbo lint",
-    "test": "turbo test",
+    "test": "turbo test --filter=\"./packages/services/backend\" --filter=\"./packages/services/llm\"",
     "build": "turbo build",
-    "build:client": "turbo build --filter=\"./apps/client\""
+    "ios": "turbo ios --filter=\"./apps/client\"",
+    "android": "turbo android --filter=\"./apps/client\""
   },
   "devDependencies": {
     "tsup": "^8.5.0",
