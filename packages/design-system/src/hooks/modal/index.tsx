@@ -17,6 +17,7 @@ import {
   ActionsheetDragIndicatorWrapper,
   ActionsheetDragIndicator,
 } from '../../components/action-sheet';
+import { Box } from '../../components/box';
 import { Button, ButtonText } from '../../components/button';
 import { Heading } from '../../components/header';
 import { Icon } from '../../components/icon';
@@ -51,7 +52,7 @@ export const useModal = () => {
               <ActionsheetDragIndicatorWrapper>
                 <ActionsheetDragIndicator />
               </ActionsheetDragIndicatorWrapper>
-              {children}
+              <Box className="w-full">{children}</Box>
             </ActionsheetContent>
           </Actionsheet>
         );

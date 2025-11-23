@@ -1,9 +1,4 @@
 {
-  "extends": "expo/tsconfig.base",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["*"]
-    }
-  }
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "expo/tsconfig.base"
 }

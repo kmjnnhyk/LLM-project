@@ -1,0 +1,58 @@
+---
+alwaysApply: true
+---
+
+## 클라이언트 앱 (apps/ 하위)
+
+### 화면 구성 규칙
+
+클라이언트 앱(`apps/` 하위의 모든 앱)에서 화면을 그릴 때는 다음 규칙을 **무조건** 따라야 합니다:
+
+1. **design-system의 organism만 사용 가능**
+   - 화면 구성 시 `@algocare/design-system/organisms/*`에서 제공하는 organism만 사용할 수 있습니다.
+   - 예: `BackgroundLayout`, `Buttons`, `FormFieldOrganism`, `ImageContainer`, `TextContainer`, `ProgressBar`, `Cards`, `Fabs` 등
+
+2. **직접 사용 금지 항목**
+   - ❌ design-system의 컴포넌트(`@algocare/design-system/src/components/*`)를 직접 import하여 사용할 수 없습니다.
+   - ❌ react-native의 컴포넌트(`View`, `Text`, `Button`, `ActivityIndicator` 등)를 직접 사용할 수 없습니다.
+   - ❌ 기타 외부 라이브러리의 UI 컴포넌트를 직접 사용할 수 없습니다.
+
+3. **예외 사항**
+   - 라우팅 관련 라이브러리(`expo-router` 등)는 사용 가능합니다.
+   - 상태 관리 라이브러리(`useState`, `useEffect` 등 React hooks)는 사용 가능합니다.
+   - 비즈니스 로직 관련 유틸리티나 서비스는 사용 가능합니다.
+   - organism들의 레이아웃을 잡을 때는 `HStack`, `VStack` 등의 align을 위한 컴포넌트는 `@algocare/design-system/components/*`에서 import 가능합니다.
+     - 예: `import { VStack } from '@algocare/design-system/components/v-stack';`
+     - 예: `import { HStack } from '@algocare/design-system/components/h-stack';`
+
+4. **필요한 컴포넌트가 없는 경우**
+   - 새로운 organism이 필요한 경우, 먼저 `packages/design-system/src/organisms/`에 organism을 추가한 후 사용해야 합니다.
+   - organism은 design-system의 컴포넌트들을 조합하여 만들어야 합니다.
+
+## 공통 타입 관리 규칙
+
+### 타입 정의 위치
+
+**2개 이상의 패키지에서 공통으로 사용하는 타입**만 `packages/utils/src/types.ts`에 정의해야 합니다.
+
+1. **공통 타입 정의 위치**
+   - ✅ `packages/utils/src/types.ts`: 2개 이상의 패키지에서 공통으로 사용하는 타입
+   - ✅ 각 패키지의 `types.d.ts`: 해당 패키지에서만 사용하는 타입
+   - ❌ 각 패키지별로 공통 타입을 중복 정의하지 않음
+
+2. **타입 import 규칙**
+   - 공통 타입: `@algocare/utils/types`에서 import
+     - 예: `import type { OnboardingData, NutritionRecommendation } from '@algocare/utils/types';`
+   - 패키지 전용 타입: 해당 패키지의 `types.d.ts`에서 import
+     - 예: `import type { ErrorResponse } from '../types.d';`
+     - 예: `import type { LLMConfig } from './types.d';`
+
+3. **패키지별 타입 파일**
+   - 각 패키지의 `types.d.ts`는:
+     - 공통 타입을 re-export하거나
+     - 해당 패키지 전용 타입만 정의
+   - 공통 타입을 중복 정의하지 않음
+
+4. **타입 변경 시**
+   - 공통 타입 변경: `packages/utils/src/types.ts`만 수정 (모든 패키지에 영향)
+   - 패키지 전용 타입 변경: 해당 패키지의 `types.d.ts`만 수정

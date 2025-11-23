@@ -1,11 +1,11 @@
 'use client';
-import React from 'react';
 import { createMenu } from '@gluestack-ui/menu';
-import { tva } from '@gluestack-ui/nativewind-utils/tva';
-import { cssInterop } from 'nativewind';
-import { Pressable, Text, View, ViewStyle } from 'react-native';
-import { Motion, AnimatePresence, MotionComponentProps } from '@legendapp/motion';
 import type { VariantProps } from '@gluestack-ui/nativewind-utils';
+import { tva } from '@gluestack-ui/nativewind-utils/tva';
+import { Motion, AnimatePresence, MotionComponentProps } from '@legendapp/motion';
+import { cssInterop } from 'nativewind';
+import React from 'react';
+import { Pressable, Text, View, ViewStyle } from 'react-native';
 
 type IMotionViewProps = React.ComponentProps<typeof View> &
   MotionComponentProps<typeof View, ViewStyle, unknown, unknown, unknown>;
@@ -113,11 +113,11 @@ const Separator = React.forwardRef<
 });
 export const UIMenu = createMenu({
   Root: MotionView,
-  Item: Item,
+  Item,
   Label: Text,
   Backdrop: BackdropPressable,
-  AnimatePresence: AnimatePresence,
-  Separator: Separator,
+  AnimatePresence,
+  Separator,
 });
 
 cssInterop(MotionView, { className: 'style' });

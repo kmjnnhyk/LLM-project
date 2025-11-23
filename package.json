@@ -1,23 +1,30 @@
 {
   "private": true,
-  "name": "@hosspie/monorepo",
+  "name": "@algocare/monorepo",
   "scripts": {
-    "dev": "turbo dev",
-    "dev:admin": "turbo dev --filter=\"{./apps/admin}...\"",
+    "dev": "turbo dev --filter=\"./apps/client\" --filter=\"./packages/services/backend\"",
+    "dev:client": "turbo dev --filter=\"./apps/client\"",
     "lint": "turbo lint",
     "test": "turbo test",
     "build": "turbo build",
-    "build:admin": "turbo build --filter=\"...{./apps/admin}\""
+    "build:client": "turbo build --filter=\"./apps/client\""
   },
   "devDependencies": {
+    "tsup": "^8.5.0",
     "turbo": "^1.13.4",
-    "typescript": "^5.8.3",
-    "tsup": "^8.3.5"
+    "typescript": "^5.9.2"
   },
   "prettier": {
     "printWidth": 100,
     "tabWidth": 2,
     "singleQuote": true,
-    "trailingComma": "es5"
-  }
+    "trailingComma": "es5",
+    "plugins": [
+      "prettier-plugin-tailwindcss"
+    ]
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }

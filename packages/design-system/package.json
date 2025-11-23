@@ -1,7 +1,13 @@
 {
   "private": true,
-  "name": "@hosspie/design-system",
+  "name": "@algocare/design-system",
   "version": "1.0.0",
+  "main": "index.js",
+  "exports": {
+    "./organisms/*": "./src/organisms/*",
+    "./hooks/*": "./src/hooks/*",
+    "./providers/*": "./src/providers/*"
+  },
   "description": "Acme UI components for React Native",
   "author": "Cedric van Putten <me@bycedric.com>",
   "license": "MIT",
@@ -9,13 +15,13 @@
     "lint": "eslint --ext js,ts,tsx ."
   },
   "eslintConfig": {
-    "extends": "@hosspie/eslint-config",
+    "extends": "@algocare/eslint-config",
     "ignorePatterns": [
       "node_modules"
     ]
   },
   "dependencies": {
-    "@hosspie/ui-config": "workspace:*",
-    "@hosspie/eslint-config": "workspace:*"
+    "@algocare/ui-config": "workspace:*",
+    "@algocare/eslint-config": "workspace:*"
   }
 }

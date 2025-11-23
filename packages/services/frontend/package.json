@@ -1,0 +1,44 @@
+{
+  "name": "@algocare/services",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    "./form": {
+      "types": "./src/form/index.tsx",
+      "default": "./src/form/index.tsx"
+    },
+    "./nutrition": {
+      "types": "./src/nutrition/index.ts",
+      "default": "./src/nutrition/index.ts"
+    },
+    "./api": {
+      "types": "./src/api/client.ts",
+      "default": "./src/api/client.ts"
+    },
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-hook-form": "^7.48.2",
+    "@hookform/resolvers": "^3.3.2",
+    "zod": "^3.22.4",
+    "@algocare/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@algocare/design-system": "workspace:*",
+    "@types/react": "^18.2.45",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-hook-form": "^7.48.2"
+  }
+}

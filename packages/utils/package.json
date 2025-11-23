@@ -1,0 +1,47 @@
+{
+  "private": true,
+  "name": "@algocare/utils",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    "./enums": {
+      "types": "./src/enums.ts",
+      "default": "./src/enums.ts"
+    },
+    "./types": {
+      "types": "./src/types.ts",
+      "default": "./src/types.ts"
+    },
+    "./validation": {
+      "types": "./src/validation.ts",
+      "default": "./src/validation.ts"
+    }
+  },
+  "description": "Shared utilities and types for algocare project",
+  "author": "algocare Team",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint --ext js,ts,tsx .",
+    "type-check": "tsc --noEmit"
+  },
+  "eslintConfig": {
+    "extends": "@algocare/eslint-config",
+    "ignorePatterns": [
+      "node_modules"
+    ]
+  },
+  "dependencies": {
+    "@algocare/eslint-config": "workspace:*",
+    "@algocare/typescript-config": "workspace:*",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/react": "~19.0.14",
+    "@types/react-native": "^0.73.0",
+    "typescript": "^5.8.3"
+  },
+  "peerDependencies": {
+    "react": "19.0.0",
+    "react-native": "0.79.5"
+  }
+}

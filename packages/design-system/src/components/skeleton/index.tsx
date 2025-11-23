@@ -1,5 +1,5 @@
 import type { VariantProps } from '@gluestack-ui/nativewind-utils';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useRef, useMemo } from 'react';
 import { Animated, Easing, Platform, View } from 'react-native';
 
 import { skeletonStyle, skeletonTextStyle } from './styles';
@@ -30,34 +30,64 @@ const Skeleton = forwardRef<React.ComponentRef<typeof Animated.View>, ISkeletonP
     },
     ref
   ) {
-    const pulseAnim = new Animated.Value(1);
+    const pulseAnim = useRef(new Animated.Value(1)).current;
+    const animationLoopRef = useRef<Animated.CompositeAnimation | null>(null);
     const customTimingFunction = Easing.bezier(0.4, 0, 0.6, 1);
     const fadeDuration = 0.6;
     const animationDuration = (fadeDuration * 10000) / speed; // Convert seconds to milliseconds
 
-    const pulse = Animated.sequence([
-      Animated.timing(pulseAnim, {
-        toValue: 1, // Start with opacity 1
-        duration: animationDuration / 2, // Third of the animation duration
-        easing: customTimingFunction,
-        useNativeDriver: Platform.OS !== 'web',
-      }),
-      Animated.timing(pulseAnim, {
-        toValue: 0.75,
-        duration: animationDuration / 2, // Third of the animation duration
-        easing: customTimingFunction,
-        useNativeDriver: Platform.OS !== 'web',
-      }),
-      Animated.timing(pulseAnim, {
-        toValue: 1,
-        duration: animationDuration / 2, // Third of the animation duration
-        easing: customTimingFunction,
-        useNativeDriver: Platform.OS !== 'web',
-      }),
-    ]);
+    const pulse = useMemo(
+      () =>
+        Animated.sequence([
+          Animated.timing(pulseAnim, {
+            toValue: 1, // Start with opacity 1
+            duration: animationDuration / 2, // Third of the animation duration
+            easing: customTimingFunction,
+            useNativeDriver: Platform.OS !== 'web',
+          }),
+          Animated.timing(pulseAnim, {
+            toValue: 0.75,
+            duration: animationDuration / 2, // Third of the animation duration
+            easing: customTimingFunction,
+            useNativeDriver: Platform.OS !== 'web',
+          }),
+          Animated.timing(pulseAnim, {
+            toValue: 1,
+            duration: animationDuration / 2, // Third of the animation duration
+            easing: customTimingFunction,
+            useNativeDriver: Platform.OS !== 'web',
+          }),
+        ]),
+      [pulseAnim, animationDuration, customTimingFunction]
+    );
+
+    useEffect(() => {
+      if (!isLoaded) {
+        // 이전 애니메이션이 있으면 정리
+        if (animationLoopRef.current) {
+          animationLoopRef.current.stop();
+        }
+        // 새 애니메이션 시작
+        animationLoopRef.current = Animated.loop(pulse);
+        animationLoopRef.current.start();
+      } else {
+        // 애니메이션 중지
+        if (animationLoopRef.current) {
+          animationLoopRef.current.stop();
+          animationLoopRef.current = null;
+        }
+      }
+
+      // 컴포넌트 언마운트 시 애니메이션 정리
+      return () => {
+        if (animationLoopRef.current) {
+          animationLoopRef.current.stop();
+          animationLoopRef.current = null;
+        }
+      };
+    }, [isLoaded, pulse]);
 
     if (!isLoaded) {
-      Animated.loop(pulse).start();
       return (
         <Animated.View
           style={{ opacity: pulseAnim }}
@@ -70,8 +100,6 @@ const Skeleton = forwardRef<React.ComponentRef<typeof Animated.View>, ISkeletonP
         />
       );
     } else {
-      Animated.loop(pulse).stop();
-
       return children;
     }
   }

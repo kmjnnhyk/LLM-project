@@ -1,0 +1,31 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@/*": ["./*"],
+      "@assets/*": ["./assets/*"],
+      "@algocare/design-system/organisms/*": ["../../packages/design-system/src/organisms/*"],
+      "@algocare/design-system/providers/*": ["../../packages/design-system/src/providers/*"],
+      "@algocare/design-system/components/*": ["../../packages/design-system/src/components/*"],
+      "@algocare/design-system/hooks/*": ["../../packages/design-system/src/hooks/*"],
+      "@algocare/utils/*": ["../../packages/utils/src/*"],
+      "@algocare/services": ["../../packages/services/frontend/src/index.ts"],
+      "@algocare/services/form": ["../../packages/services/frontend/src/form/index.tsx"]
+    },
+    "baseUrl": ".",
+    "moduleResolution": "bundler"
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "nativewind-env.d.ts",
+    "../../packages/design-system/src/**/*.ts",
+    "../../packages/design-system/src/**/*.tsx",
+    "../../packages/utils/src/**/*.ts",
+    "../../packages/services/frontend/src/**/*.ts",
+    "../../packages/services/frontend/src/**/*.tsx"
+  ]
+}

@@ -1,8 +1,8 @@
 'use client';
+import { colorConfig } from '@algocare/ui-config/tokens/color';
 import { setFlushStyles } from '@gluestack-ui/nativewind-utils/flush';
 import { OverlayProvider } from '@gluestack-ui/overlay';
 import { ToastProvider } from '@gluestack-ui/toast';
-import { colorConfig } from '@hosspie/ui-config/tokens/color';
 import React, { useEffect, useLayoutEffect } from 'react';
 
 import { script } from './script';

@@ -1,7 +1,17 @@
 'use client';
-import React from 'react';
 import { H4 } from '@expo/html-elements';
 import { createActionsheet } from '@gluestack-ui/actionsheet';
+import { PrimitiveIcon, UIIcon } from '@gluestack-ui/icon';
+import type { VariantProps } from '@gluestack-ui/nativewind-utils';
+import { tva } from '@gluestack-ui/nativewind-utils/tva';
+import {
+  Motion,
+  AnimatePresence,
+  createMotionAnimatedComponent,
+  MotionComponentProps,
+} from '@legendapp/motion';
+import { cssInterop } from 'nativewind';
+import React from 'react';
 import {
   Pressable,
   View,
@@ -13,16 +23,6 @@ import {
   PressableProps,
   ViewStyle,
 } from 'react-native';
-import { PrimitiveIcon, UIIcon } from '@gluestack-ui/icon';
-import { tva } from '@gluestack-ui/nativewind-utils/tva';
-import type { VariantProps } from '@gluestack-ui/nativewind-utils';
-import { cssInterop } from 'nativewind';
-import {
-  Motion,
-  AnimatePresence,
-  createMotionAnimatedComponent,
-  MotionComponentProps,
-} from '@legendapp/motion';
 
 const ItemWrapper = React.forwardRef<React.ComponentRef<typeof Pressable>, PressableProps>(
   function ItemWrapper({ ...props }, ref) {
@@ -50,13 +50,13 @@ export const UIActionsheet = createActionsheet({
   DragIndicator: View,
   IndicatorWrapper: View,
   Backdrop: AnimatedPressable,
-  ScrollView: ScrollView,
-  VirtualizedList: VirtualizedList,
-  FlatList: FlatList,
-  SectionList: SectionList,
+  ScrollView,
+  VirtualizedList,
+  FlatList,
+  SectionList,
   SectionHeaderText: H4,
   Icon: UIIcon,
-  AnimatePresence: AnimatePresence,
+  AnimatePresence,
 });
 
 cssInterop(UIActionsheet, { className: 'style' });
